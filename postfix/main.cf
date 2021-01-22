@@ -50,7 +50,6 @@ smtpd_tls_mandatory_exclude_ciphers = AES128, GCM
 smtpd_tls_protocols= !SSLv2, !SSLv3, !TLSv1
 smtpd_tls_mandatory_protocols= !TLSv1, !SSLv3
 smtpd_tls_mandatory_ciphers = high
-smtp_tls_policy_maps = hash:/etc/postfix/tls_policy
 
 # Restrictions
 smtpd_helo_restrictions =
@@ -119,7 +118,6 @@ smtp_always_send_ehlo = yes
 smtpd_timeout = 30s
 
 smtp_rcpt_timeout = 15s
-smtpd_recipient_limit = 40
 minimal_backoff_time = 180s
 maximal_backoff_time = 3h
 
@@ -164,14 +162,6 @@ smtp_destination_rate_delay = 1s
 
 # --------------------------------- #
 
-# ====== DKIM CONEXIÓN PARA FIRMA DIGITAL ====== #
-# DKIM
-milter_default_action = accept
-#milter_protocol = 6
-milter_protocol = 2
-smtpd_milters = inet:localhost:12345, inet:127.0.0.1:8893
-non_smtpd_milters = inet:localhost:12345
-# ============================================== #
 
 ################ FUNCIONES EXTENDIDAS DEL SERVIDOR ############
 smtpd_helo_required = yes

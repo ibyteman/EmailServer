@@ -19,13 +19,11 @@ readme_directory = no
 # fresh installs.
 compatibility_level = 2
 
-# TLS parametros
-#smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
-#smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
-smtpd_tls_cert_file=/etc/letsencrypt/live/mx.byteman.io/fullchain.pem
-smtpd_tls_key_file=/etc/letsencrypt/live/mx.byteman.io/privkey.pem
-smtp_tls_CApath = /etc/letsencrypt/live/mx.byteman.io/cert.pem
-smtpd_tls_CApath = /etc/letsencrypt/live/mx.byteman.io/cert.pem
+# TLS parameters
+smtpd_tls_cert_file=/etc/dovecot/dovecot.pem
+smtpd_tls_key_file=/etc/dovecot/private/dovecot.pem
+smtp_tls_CApath = /etc/letsencrypt/live/mxi.servilinux.com/cert.pem
+smtpd_tls_CApath = /etc/letsencrypt/live/mxi.servilinux.com/cert.pem
 smtpd_use_tls=yes
 
 smtpd_tls_auth_only = yes
@@ -46,10 +44,14 @@ smtpd_sasl_auth_enable = yes
 smtp_sasl_auth_enable = yes
 header_size_limit = 4096000
 
+#---- Con SES ---- #
+
 smtpd_tls_mandatory_exclude_ciphers = AES128, GCM
 smtpd_tls_protocols= !SSLv2, !SSLv3, !TLSv1
 smtpd_tls_mandatory_protocols= !TLSv1, !SSLv3
 smtpd_tls_mandatory_ciphers = high
+
+# -----------------------------------------#
 
 # Restrictions
 smtpd_helo_restrictions =
@@ -81,7 +83,7 @@ policy-spf_time_limit = 3600s
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
-# Nombre devuelto por la dirección IP
+# Nombre devuelto por la direccion IP
 myhostname = ec2-34-227-184-1.compute-1.amazonaws.com
 #myhostname = 6.120.44.52.in-addr.arpa.servilinux.com
 
@@ -105,7 +107,7 @@ virtual_mailbox_domains = mysql:/etc/postfix/mysql-virtual-mailbox-domains.cf
 virtual_mailbox_maps = mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf
 virtual_alias_maps = mysql:/etc/postfix/mysql-virtual-alias-maps.cf, mysql:/etc/postfix/mysql-virtual-email2email.cf
 
-# Mas restricciones y parámetros MTA
+# Mas restricciones y parametros MTA
 disable_vrfy_command = yes
 strict_rfc821_envelopes = yes
 #smtpd_etrn_restrictions = reject
@@ -121,7 +123,7 @@ smtp_rcpt_timeout = 15s
 minimal_backoff_time = 180s
 maximal_backoff_time = 3h
 
-# Códigos de respuestas de rechazo
+# Codigos de respuestas de rechazo
 invalid_hostname_reject_code = 550
 non_fqdn_reject_code = 550
 unknown_address_reject_code = 550
@@ -145,16 +147,16 @@ anvil_rate_time_unit=1440m
 smtpd_client_message_rate_limit=100
 # ----------------------------------------------- #
 
-# Maxima cantidad de días de permanencia de email en cola
+# Maxima cantidad de dias de permanencia de email en cola
 bounce_queue_lifetime = 3d
 maximal_queue_lifetime = 3d
 # ----------------------------------------------- #
 
-# Próximo salto
+# Proximo salto
 default_filter_nexthop = $myhostname
 # ----------------------------------------------- #
 
-# Control del tiempo de entrega de los mensajes y a la cantidad de destinatarios.
+# Control del tiempo de entrega de los mensajes y a la cantidas de destinatarios.
 # Por lo tanto, si se inyecta correo para 75 dominios diferentes, puede intentar enviar un mensaje a los 75 a la vez, pero nunca más de 25 a la vez a example.com y nunca más de 1 por segundo a example.com .
 
 smtp_destination_concurrency_limit = 25
@@ -162,8 +164,16 @@ smtp_destination_rate_delay = 1s
 
 # --------------------------------- #
 
+# ====== DKIM CONEXION PARA FIRMA DIGITAL ====== #
+# DKIM
+milter_default_action = accept
+#milter_protocol = 6
+milter_protocol = 2
+smtpd_milters = inet:localhost:12345, inet:127.0.0.1:8893
+non_smtpd_milters = inet:localhost:12345
+# ============================================== #
 
-################ FUNCIONES EXTENDIDAS DEL SERVIDOR ############
+################ FINCIONES EXTENDIDAS DEL SERVIDOR ############
 smtpd_helo_required = yes
 smtpd_error_sleep_time = 10
 smtpd_junk_command_limit = 2

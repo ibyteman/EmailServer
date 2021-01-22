@@ -61,12 +61,12 @@ smtpd_helo_restrictions =
         reject_non_fqdn_helo_hostname
 
 smtpd_recipient_restrictions =
-				permit_mynetworks,
-				permit_sasl_authenticated,
- 				reject_rbl_client sbl.spamhaus.org,
-				#reject_rbl_client zen.spamhaus.org,
-				#reject_rbl_client bl.spamcop.net,
-				#reject_rbl_client dnsbl.sorbs.net,
+	permit_mynetworks,
+	permit_sasl_authenticated,
+ 	reject_rbl_client sbl.spamhaus.org,
+	#reject_rbl_client zen.spamhaus.org,
+	#reject_rbl_client bl.spamcop.net,
+	#reject_rbl_client dnsbl.sorbs.net,
 
 smtpd_sender_restrictions =
         permit_mynetworks,
@@ -75,9 +75,9 @@ smtpd_sender_restrictions =
         reject_unknown_sender_domain
 
 smtpd_relay_restrictions =
-				permit_mynetworks,
- 				permit_sasl_authenticated,
-				defer_unauth_destination
+	permit_mynetworks,
+ 	permit_sasl_authenticated,
+	defer_unauth_destination
 
 policy-spf_time_limit = 3600s
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache

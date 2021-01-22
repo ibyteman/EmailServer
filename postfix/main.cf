@@ -22,10 +22,10 @@ compatibility_level = 2
 # TLS parametros
 #smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
 #smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
-smtpd_tls_cert_file=/etc/dovecot/dovecot.pem
-smtpd_tls_key_file=/etc/dovecot/private/dovecot.pem
-smtp_tls_CApath = /etc/letsencrypt/live/mxi.servilinux.com/cert.pem
-smtpd_tls_CApath = /etc/letsencrypt/live/mxi.servilinux.com/cert.pem
+smtpd_tls_cert_file=/etc/letsencrypt/live/mx.byteman.io/fullchain.pem
+smtpd_tls_key_file=/etc/letsencrypt/live/mx.byteman.io/privkey.pem
+smtp_tls_CApath = /etc/letsencrypt/live/mx.byteman.io/cert.pem
+smtpd_tls_CApath = /etc/letsencrypt/live/mx.byteman.io/cert.pem
 smtpd_use_tls=yes
 
 smtpd_tls_auth_only = yes
@@ -59,18 +59,13 @@ smtpd_helo_restrictions =
         reject_invalid_helo_hostname,
         reject_non_fqdn_helo_hostname
 
-smtpd_data_restrictions =
-				check_sender_access regexp:/etc/postfix/sender_access
-
 smtpd_recipient_restrictions =
 				permit_mynetworks,
 				permit_sasl_authenticated,
-				check_recipient_access hash:/etc/postfix/recipient_access,
  				reject_rbl_client sbl.spamhaus.org,
 				#reject_rbl_client zen.spamhaus.org,
 				#reject_rbl_client bl.spamcop.net,
 				#reject_rbl_client dnsbl.sorbs.net,
-				check_policy_service unix:private/policy-spf
 
 smtpd_sender_restrictions =
         permit_mynetworks,

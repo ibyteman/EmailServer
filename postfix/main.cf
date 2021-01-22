@@ -84,8 +84,7 @@ smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
 # Nombre devuelto por la direccion IP
-myhostname = ec2-34-227-184-1.compute-1.amazonaws.com
-#myhostname = 6.120.44.52.in-addr.arpa.servilinux.com
+myhostname = ec2-54-150-214-64.ap-northeast-1.compute.amazonaws.com
 
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
@@ -166,11 +165,10 @@ smtp_destination_rate_delay = 1s
 
 # ====== DKIM CONEXION PARA FIRMA DIGITAL ====== #
 # DKIM
-milter_default_action = accept
-#milter_protocol = 6
-milter_protocol = 2
-smtpd_milters = inet:localhost:12345, inet:127.0.0.1:8893
-non_smtpd_milters = inet:localhost:12345
+#milter_default_action = accept
+#milter_protocol = 2
+#smtpd_milters = inet:localhost:12345, inet:127.0.0.1:8893
+#non_smtpd_milters = inet:localhost:12345
 # ============================================== #
 
 ################ FINCIONES EXTENDIDAS DEL SERVIDOR ############

@@ -2,4 +2,4 @@ user = mailuser
 password = cursoemail
 hosts = 127.0.0.1
 dbname = mailserver
-query = SELECT email FROM virtual_users WHERE source='%s'
+query = SELECT email FROM virtual_users WHERE email='%s'

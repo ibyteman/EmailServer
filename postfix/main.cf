@@ -34,15 +34,15 @@ smtpd_tls_received_header = yes
 
 smtpd_sasl_security_options = noanonymous, noplaintext
 smtpd_sasl_tls_security_options = noanonymous
-smtp_sasl_security_options = noanonymous
+#smtp_sasl_security_options = noanonymous
 
 # Authentication
 smtpd_sasl_type = dovecot
 smtpd_sasl_path = private/auth
 smtpd_sasl_auth_enable = yes
 
-smtp_sasl_auth_enable = yes
-header_size_limit = 4096000
+#smtp_sasl_auth_enable = yes
+# header_size_limit = 4096000
 
 #---- Con SES ---- #
 
@@ -75,9 +75,9 @@ smtpd_sender_restrictions =
         reject_unknown_sender_domain
 
 smtpd_relay_restrictions =
-	permit_mynetworks,
- 	permit_sasl_authenticated,
-	defer_unauth_destination
+				permit_mynetworks,
+ 				permit_sasl_authenticated,
+				defer_unauth_destination
 
 #policy-spf_time_limit = 3600s
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
@@ -90,6 +90,7 @@ alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 #myorigin =
 mydestination = localhost
+#mydestination = $myhostname, ec2-13-58-53-44.us-east-2.compute.amazonaws.com, ip-172-31-33-158.us-east-2.compute.internal, localhost.us-east-2.compute.internal, localhost
 relayhost =
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
 mailbox_size_limit = 3000500000

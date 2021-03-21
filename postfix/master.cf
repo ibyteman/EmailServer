@@ -9,6 +9,7 @@
 #               (yes)   (yes)   (no)    (never) (100)
 # ==========================================================================
 smtp      inet  n       -       y       -       -       smtpd
+#  -o content_filter=spamassassin
 #587	   inet	 n	 -	 y	 -	 -	 smtpd
 #smtp      inet  n       -       y       -       1       postscreen
 #smtpd     pass  -       -       y       -       -       smtpd
@@ -124,4 +125,11 @@ scalemail-backend unix	-	n	n	-	2	pipe
 mailman   unix  -       n       n       -       -       pipe
   flags=FR user=list argv=/usr/lib/mailman/bin/postfix-to-mailman.py
   ${nexthop} ${user}
+
+# Agregando politicas de SPF
+#policy-spf  unix  -       n       n       -       -     spawn
+#  user=nobody argv=/usr/bin/policyd-spf
+
+spamassassin unix - 	n   	n   	-   	-   	pipe
+  user=spamd argv=/usr/bin/spamc -f -e /usr/sbin/sendmail -oi -f ${sender} ${recipient}
 

@@ -130,6 +130,6 @@ mailman   unix  -       n       n       -       -       pipe
 #policy-spf  unix  -       n       n       -       -     spawn
 #  user=nobody argv=/usr/bin/policyd-spf
 
-spamassassin unix - 	n   	n   	-   	-   	pipe
-  user=spamd argv=/usr/bin/spamc -f -e /usr/sbin/sendmail -oi -f ${sender} ${recipient}
+#spamassassin unix - 	n   	n   	-   	-   	pipe
+#  user=spamd argv=/usr/bin/spamc -f -e /usr/sbin/sendmail -oi -f ${sender} ${recipient}
 

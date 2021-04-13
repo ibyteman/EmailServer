@@ -79,7 +79,7 @@ smtpd_relay_restrictions =
  				permit_sasl_authenticated,
 				defer_unauth_destination
 
-#policy-spf_time_limit = 3600s
+#policyd-spf_time_limit = 3600s 
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
@@ -167,9 +167,9 @@ smtp_destination_rate_delay = 1s
 # ====== DKIM CONEXION PARA FIRMA DIGITAL ====== #
 # DKIM
 #milter_default_action = accept
-#milter_protocol = 2
-#smtpd_milters = inet:localhost:12345, inet:127.0.0.1:8893
-#non_smtpd_milters = inet:localhost:12345
+#milter_protocol = 6
+#smtpd_milters = local:opendkim/opendkim.sock
+#non_smtpd_milters = local:opendkim/opendkim.sock
 # ============================================== #
 
 ################ FINCIONES EXTENDIDAS DEL SERVIDOR ############

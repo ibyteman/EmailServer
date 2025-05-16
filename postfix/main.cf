@@ -147,7 +147,7 @@ anvil_rate_time_unit=1440m
 smtpd_client_message_rate_limit=100
 # ----------------------------------------------- #
 
-# Maxima cantidad de dias de permanencia de email en cola
+# Maxima cantidad de dias en cola
 bounce_queue_lifetime = 3d
 maximal_queue_lifetime = 3d
 # ----------------------------------------------- #
@@ -155,9 +155,6 @@ maximal_queue_lifetime = 3d
 # Proximo salto
 default_filter_nexthop = $myhostname
 # ----------------------------------------------- #
-
-# Control del tiempo de entrega de los mensajes y a la cantidas de destinatarios.
-# Por lo tanto, si se inyecta correo para 75 dominios diferentes, puede intentar enviar un mensaje a los 75 a la vez, pero nunca más de 25 a la vez a example.com y nunca más de 1 por segundo a example.com .
 
 smtp_destination_concurrency_limit = 25
 smtp_destination_rate_delay = 1s
